@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 Yasuhiro Inami. All rights reserved.
 //
 
-#import "YIRightTouchableToolbar.h"
+#import "UIToolbar+YIRightTouchable.h"
 #import "JRSwizzle.h"
 
 #define IS_IOS_AT_LEAST(ver)    ([[[UIDevice currentDevice] systemVersion] compare:ver] != NSOrderedAscending)
@@ -18,16 +18,15 @@
 #endif
 
 
-@implementation YIRightTouchableToolbar
+@implementation UIToolbar (YIRightTouchable)
 
 + (void)load
 {
-    [YIRightTouchableToolbar jr_swizzleMethod:@selector(hitTest:withEvent:)
+    [UIToolbar jr_swizzleMethod:@selector(hitTest:withEvent:)
                                    withMethod:@selector(YIRightTouchableToolbar_hitTest:withEvent:)
                                         error:NULL];
 }
 
-// NOTE: method-swizzling UIToolbar directly didn't work, so subclass it instead
 - (UIView *)YIRightTouchableToolbar_hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
     UIView* hitSubview = [self YIRightTouchableToolbar_hitTest:point withEvent:event];

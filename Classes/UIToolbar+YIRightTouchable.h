@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YIRightTouchableToolbar : UIToolbar
+@interface UIToolbar (YIRightTouchable)
 
 @end
